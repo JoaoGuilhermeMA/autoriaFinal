@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Tanque</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+        }
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Excluir Tanque</h1>
+    <select id="tanqueList"></select>
+    <br><br>
+    <button onclick="deleteTank()">Excluir Tanque Selecionado</button>
+
+    <button onclick="goBack()">Voltar</button>
+
+    <script>
+        window.onload = function() {
+            fillTankList();
+        };
+
+        function fillTankList() {
+            var tanks = JSON.parse(localStorage.getItem('tanks')) || {};
+            var tankList = document.getElementById('tanqueList');
+
+            for (var tankName in tanks) {
+                var option = document.createElement('option');
+                option.value = tankName;
+                option.textContent = tankName;
+                tankList.appendChild(option);
+            }
+        }
+
+        function deleteTank() {
+            var selectedTankName = document.getElementById('tanqueList').value;
+            var tanks = JSON.parse(localStorage.getItem('tanks')) || {};
+
+            // Verifica se o tanque selecionado existe
+            if (selectedTankName in tanks) {
+                // Remove o tanque do Local Storage
+                delete tanks[selectedTankName];
+                localStorage.setItem('tanks', JSON.stringify(tanks));
+                alert('Tanque excluído com sucesso!');
+                window.location.reload(); // Recarrega a página para atualizar a lista de tanques
+            } else {
+                alert('Tanque não encontrado!');
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

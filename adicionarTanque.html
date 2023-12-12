@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Tanque</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+        }
+        #addTankForm {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            color: white;
+            background-color: blue;
+            cursor: pointer;
+        }
+        /* Estilo para os campos de texto */
+        input[type="text"],
+        input[type="number"] {
+            background-color: white;
+            color: black;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            width: 250px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Adicionar Tanque</h1>
+    <form id="addTankForm" onsubmit="return saveTank(event)">
+        <label for="tankName">Nome do Tanque:</label>
+        <input type="text" id="tankName" name="tankName" required>
+        <br>
+        <label for="fishType">Tipo de Peixe:</label>
+        <input type="text" id="fishType" name="fishType" required>
+        <br>
+        <label for="tankSize">Tamanho do Tanque (m²):</label>
+        <input type="number" id="tankSize" name="tankSize" required>
+        <br>
+        <label for="quantity">Quantidade de Peixes:</label>
+        <input type="number" id="quantity" name="quantity" required>
+        <br>
+        <label for="waterTemperature">Temperatura da Água (°C):</label>
+        <input type="number" id="waterTemperature" name="waterTemperature" required>
+        <br>
+        <label for="phLevel">Nível de pH:</label>
+        <input type="number" id="phLevel" name="phLevel" step="0.1" required>
+        <br>
+        <label for="oxygenLevel">Nível de Oxigênio (mg/L):</label>
+        <input type="number" id="oxygenLevel" name="oxygenLevel" step="0.1" required>
+        <br>
+        <input type="submit" value="Adicionar">
+    </form>
+
+    <button onclick="goBack()">Voltar</button>
+
+    <script>
+        function saveTank(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            var tankName = document.getElementById('tankName').value;
+            var fishType = document.getElementById('fishType').value;
+            var tankSize = document.getElementById('tankSize').value;
+            var quantity = document.getElementById('quantity').value;
+            var waterTemperature = document.getElementById('waterTemperature').value;
+            var phLevel = document.getElementById('phLevel').value;
+            var oxygenLevel = document.getElementById('oxygenLevel').value;
+
+            // Verifica se todos os campos estão preenchidos
+            if (
+                tankName === '' ||
+                fishType === '' ||
+                tankSize === '' ||
+                quantity === '' ||
+                waterTemperature === '' ||
+                phLevel === '' ||
+                oxygenLevel === ''
+            ) {
+                alert('Por favor, preencha todos os campos.');
+                return false; // Impede a submissão do formulário
+            }
+
+            var tanks = JSON.parse(localStorage.getItem('tanks')) || {};
+            tanks[tankName] = {
+                fishType: fishType,
+                tankSize: tankSize,
+                quantity: quantity,
+                waterTemperature: waterTemperature,
+                phLevel: phLevel,
+                oxygenLevel: oxygenLevel
+            };
+
+            localStorage.setItem('tanks', JSON.stringify(tanks));
+
+            alert('Tanque adicionado com sucesso!');
+            window.location.href = 'tela.html'; // Redireciona para tela.html
+            return false;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

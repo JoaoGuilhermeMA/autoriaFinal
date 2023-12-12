@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Tanques</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+        }
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            color: white;
+            background-color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tanques Registrados</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Tanque</th>
+                <th>Tipo de Peixe</th>
+                <th>Tamanho do Tanque (m²)</th>
+                <th>Quantidade de Peixes</th>
+                <th>Temperatura da Água (°C)</th>
+                <th>Nível de pH</th>
+                <th>Nível de Oxigênio (mg/L)</th>
+                <!-- Adicione mais colunas conforme necessário -->
+            </tr>
+        </thead>
+        <tbody id="tankList">
+            <!-- Os tanques serão exibidos aqui -->
+        </tbody>
+    </table>
+
+    <button onclick="goBack()">Voltar</button>
+
+    <script>
+        window.onload = function() {
+            showTanks();
+        };
+
+        function showTanks() {
+            var tanks = JSON.parse(localStorage.getItem('tanks')) || {};
+            var tankList = document.getElementById('tankList');
+            tankList.innerHTML = '';
+
+            for (var tankName in tanks) {
+                var tank = tanks[tankName];
+                var row = document.createElement('tr');
+
+                var nameCell = document.createElement('td');
+                nameCell.textContent = tankName;
+                row.appendChild(nameCell);
+
+                var fishTypeCell = document.createElement('td');
+                fishTypeCell.textContent = tank.fishType;
+                row.appendChild(fishTypeCell);
+
+                var tankSizeCell = document.createElement('td');
+                tankSizeCell.textContent = tank.tankSize;
+                row.appendChild(tankSizeCell);
+
+                var quantityCell = document.createElement('td');
+                quantityCell.textContent = tank.quantity;
+                row.appendChild(quantityCell);
+
+                var waterTemperatureCell = document.createElement('td');
+                waterTemperatureCell.textContent = tank.waterTemperature;
+                row.appendChild(waterTemperatureCell);
+
+                var phLevelCell = document.createElement('td');
+                phLevelCell.textContent = tank.phLevel;
+                row.appendChild(phLevelCell);
+
+                var oxygenLevelCell = document.createElement('td');
+                oxygenLevelCell.textContent = tank.oxygenLevel;
+                row.appendChild(oxygenLevelCell);
+
+                tankList.appendChild(row);
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Página de Login</title>
+    <style>
+      body {
+        background-color: white;
+        color: black;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 36px;
+        margin-top: 50px;
+      }
+      .action-container {
+        margin-top: 100px;
+      }
+      .action-button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        color: white;
+        background-color: blue;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bem-vindo!</h1>
+    <div class="action-container">
+      <button class="action-button" onclick="adicionarTanque()">
+        Adicionar Tanque
+      </button>
+      <button class="action-button" onclick="editarTanque()">
+        Editar Tanque
+      </button>
+      <button class="action-button" onclick="excluirTanque()">
+        Excluir Tanque
+      </button>
+      <button class="action-button" onclick="verTanque()">Ver Tanque</button>
+    </div>
+
+    <script>
+      function adicionarTanque() {
+        window.location.href = "adicionarTanque.html";
+      }
+
+      function editarTanque() {
+        window.location.href = "editar.html";
+      }
+
+      function excluirTanque() {
+        window.location.href = "excluir.html";
+      }
+
+      function verTanque() {
+        window.location.href = "ver.html";
+      }
+    </script>
+  </body>
+</html>

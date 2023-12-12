@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Registro</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 36px;
+            margin-top: 50px;
+        }
+        .register-container {
+            margin-top: 100px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        input[type="text"],
+        input[type="password"] {
+            background-color: #333;
+        }
+        input[type="submit"] {
+            background-color: green;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registrar</h1>
+    <div class="register-container">
+        <form class="register-form" action="#" method="post" onsubmit="registerUser(event)">
+            <input type="text" id="new-username" name="new-username" placeholder="Novo Usuário">
+            <br>
+            <input type="password" id="new-password" name="new-password" placeholder="Nova Senha">
+            <br>
+            <input type="submit" value="Registrar">
+        </form>
+    </div>
+
+    <script>
+        function registerUser(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            // Obter novos valores do formulário
+            var newUsername = document.getElementById('new-username').value;
+            var newPassword = document.getElementById('new-password').value;
+
+            // Verificar se já existem usuários armazenados
+            var users = JSON.parse(localStorage.getItem('users')) || {};
+
+            // Verificar se o nome de usuário já existe
+            if (users[newUsername]) {
+                alert('Nome de usuário já existe! Escolha outro.');
+                return;
+            }
+
+            // Adicionar novo usuário ao objeto de usuários
+            users[newUsername] = newPassword;
+
+            // Salvar o objeto atualizado de usuários no Local Storage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Usuário registrado com sucesso!');
+            window.location.href = 'index.html'; // Redirecionar para a página de login
+        }
+    </script>
+</body>
+</html>
