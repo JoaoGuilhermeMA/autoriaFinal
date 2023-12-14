@@ -20,18 +20,22 @@
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 20px;
+            width: 250px;
         }
         label {
             display: block;
             margin-bottom: 10px;
+            font-weight: bold;
         }
         input[type="text"],
         input[type="number"] {
-            padding: 8px;
+            padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             margin-bottom: 15px;
+            width: 250px;
         }
+        button[type="submit"],
         button {
             padding: 10px 20px;
             border: none;
@@ -40,6 +44,13 @@
             color: white;
             cursor: pointer;
         }
+        button[type="submit"]:hover,
+        button:hover {
+            background-color: darkblue;
+        }
+        .buttons-container {
+            margin-top: 20px; /* Margem entre os botões */
+        }
     </style>
 </head>
 <body>
@@ -47,19 +58,30 @@
     <select id="tanqueList"></select>
     <br><br>
     <form id="editTankForm" onsubmit="return editTank(event)">
-        <label for="fishType">Novo Tipo de Peixe:</label>
+        <label for="fishType">Tipo de Peixe:</label>
         <input type="text" id="fishType" name="fishType" required>
         <br>
-        <label for="tankSize">Novo Tamanho do Tanque (m²):</label>
+        <label for="tankSize">Tamanho do Tanque (m²):</label>
         <input type="number" id="tankSize" name="tankSize" required>
         <br>
-        <label for="quantity">Nova Quantidade de Peixes:</label>
+        <label for="quantity">Quantidade de Peixes:</label>
         <input type="number" id="quantity" name="quantity" required>
+        <br>
+        <label for="waterTemperature">Temperatura da Água (°C):</label>
+        <input type="number" id="waterTemperature" name="waterTemperature" required>
+        <br>
+        <label for="phLevel">Nível de pH:</label>
+        <input type="number" id="phLevel" name="phLevel" step="0.1" required>
+        <br>
+        <label for="oxygenLevel">Nível de Oxigênio (mg/L):</label>
+        <input type="number" id="oxygenLevel" name="oxygenLevel" step="0.1" required>
         <br>
         <button type="submit">Salvar Alterações</button>
     </form>
 
-    <button onclick="goBack()">Voltar</button>
+    <div class="buttons-container">
+        <button onclick="goBack()">Voltar</button>
+    </div>
 
     <script>
         window.onload = function() {
@@ -86,17 +108,21 @@
             var newFishType = document.getElementById('fishType').value;
             var newTankSize = document.getElementById('tankSize').value;
             var newQuantity = document.getElementById('quantity').value;
+            var newWaterTemperature = document.getElementById('waterTemperature').value;
+            var newPhLevel = document.getElementById('phLevel').value;
+            var newOxygenLevel = document.getElementById('oxygenLevel').value;
 
-            // Verifica se o tanque selecionado existe
             if (selectedTankName in tanks) {
-                // Atualiza as informações do tanque
                 tanks[selectedTankName].fishType = newFishType;
                 tanks[selectedTankName].tankSize = newTankSize;
                 tanks[selectedTankName].quantity = newQuantity;
+                tanks[selectedTankName].waterTemperature = newWaterTemperature;
+                tanks[selectedTankName].phLevel = newPhLevel;
+                tanks[selectedTankName].oxygenLevel = newOxygenLevel;
 
-                // Salva no Local Storage
                 localStorage.setItem('tanks', JSON.stringify(tanks));
                 alert('Tanque editado com sucesso!');
+                goBack();
             } else {
                 alert('Tanque não encontrado!');
             }

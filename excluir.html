@@ -67,6 +67,7 @@
                 localStorage.setItem('tanks', JSON.stringify(tanks));
                 alert('Tanque excluído com sucesso!');
                 window.location.reload(); // Recarrega a página para atualizar a lista de tanques
+                goBack();
             } else {
                 alert('Tanque não encontrado!');
             }

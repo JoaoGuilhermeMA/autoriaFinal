@@ -1,79 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Página de Login</title>
     <style>
-        body {
-            background-color: white;
-            color: black;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            font-size: 36px;
-            margin-top: 50px;
-        }
-        .login-container {
-            margin-top: 100px;
-        }
-        input[type="text"],
-        input[type="password"],
-        input[type="submit"],
-        .register-button {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            color: white;
-            background-color: blue;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-        input[type="text"],
-        input[type="password"] {
-            background-color: #333;
-        }
-        input[type="submit"] {
-            background-color: blue;
-        }
+      body {
+        background-color: white;
+        color: black;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 36px;
+        margin-top: 50px;
+      }
+      .login-container {
+        margin-top: 100px;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="submit"],
+      .register-button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        color: white;
+        background-color: blue;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+      input[type="text"],
+      input[type="password"] {
+        background-color: white;
+        color: black;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        width: 250px;
+      }
+      input[type="submit"] {
+        background-color: blue;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Login</h1>
     <div class="login-container">
-        <form class="login-form" action="#" method="post" onsubmit="checkLogin(event)">
-            <input type="text" id="username" name="username" placeholder="Usuário">
-            <br>
-            <input type="password" id="password" name="password" placeholder="Senha">
-            <br>
-            <input type="submit" value="Entrar">
-            <a href="registrar.html" class="register-button">Registrar</a>
-        </form>
+      <form
+        class="login-form"
+        action="#"
+        method="post"
+        onsubmit="checkLogin(event)"
+      >
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Usuário"
+        />
+        <br />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Senha"
+        />
+        <br />
+        <input type="submit" value="Entrar" />
+        <a href="registrar.html" class="register-button">Registrar</a>
+      </form>
     </div>
 
     <script>
-        function checkLogin(event) {
-            event.preventDefault(); // Impede o envio do formulário
+      function checkLogin(event) {
+        event.preventDefault(); // Impede o envio do formulário
 
-            // Obter valores do formulário
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
+        // Obter valores do formulário
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
 
-            // Obter usuários armazenados no Local Storage
-            var users = JSON.parse(localStorage.getItem('users')) || {};
+        // Obter usuários armazenados no Local Storage
+        var users = JSON.parse(localStorage.getItem("users")) || {};
 
-            // Verificar se o usuário e senha correspondem aos armazenados
-            if (users[username] === password) {
-                alert('Login bem-sucedido!');
-                window.location.href = 'tela.html'; // Redireciona para a página tela.html
-            } else {
-                alert('Usuário ou senha incorretos!');
-            }
+        // Verificar se o usuário e senha correspondem aos armazenados
+        if (users[username] === password) {
+          alert("Login bem-sucedido!");
+          window.location.href = "tela.html"; // Redireciona para a página tela.html
+        } else {
+          alert("Usuário ou senha incorretos!");
         }
+      }
     </script>
-</body>
+  </body>
 </html>
